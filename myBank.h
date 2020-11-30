@@ -1,6 +1,7 @@
 #ifndef MY_BANK
 #define MY_BANK
 
+int checkAcc(int x);
 void openAcc(double x);
 void balance(int x);
 void deposit(int x, double y);

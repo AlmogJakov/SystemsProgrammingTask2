@@ -3,6 +3,18 @@
 
 double Accs[2][50];
 
+int checkAcc(int x) {
+    if (x>950||x<901) { // check if x in range of accounts numbers
+        printf("Invalid account number.\n");
+        return 0;
+    }
+    if (Accs[1][x-901]==0) {
+        printf("This account is closed\n");
+        return 0;
+    }
+    return 1;
+}
+
 void openAcc(double x) {
     int found = 0;
     int iterator = 0;
@@ -21,16 +33,20 @@ void openAcc(double x) {
 
 void balance(int x) {
     if (x>950||x<901) { // check if x in range of accounts numbers
-        printf("Out of account numbers range.\n");
+        printf("Invalid account number.\n");
         return;
     }
     if (Accs[1][x-901]==0) printf("This account is closed\n");
-    else printf("The new balance is %.2lf\n", Accs[0][x-901]);
+    else printf("The balance of account number %d is: %.2lf\n", x, Accs[0][x-901]);
 }
 
 void deposit(int acc, double amount){
-    if (acc>950||acc<901||amount<0) { // check if acc in range of accounts numbers and amount is positive
-        printf("Out of account numbers range or invalid amount input.\n");
+    if (acc>950||acc<901) { // check if acc in range of accounts numbers
+        printf("Out of account numbers range.\n");
+        return;
+    }
+    if (amount<0) { // check if amount is positive
+        printf("Cannot deposit a negative amount.\n");
         return;
     }
     if (Accs[1][acc-901]==0) printf("This account is closed\n");
@@ -41,10 +57,13 @@ void deposit(int acc, double amount){
 }
 
 void withdrawal(int acc, double amount){
-    if (acc>950||acc<901||amount<0) { // check if acc in range of accounts numbers and amount is positive
-        printf("Out of account numbers range or invalid amount input.\n");
+    if (acc>950||acc<901) { // check if acc in range of accounts numbers
+        printf("Out of account numbers range.\n");
         return;
     }
+    //if (amount<0) { // check if amount is positive
+    //    amount*=(-1);
+    //}
     if (Accs[1][acc-901]==0) printf("This account is closed\n");
     else {
         if (Accs[0][acc-901]-amount>=0){
@@ -58,18 +77,19 @@ void withdrawal(int acc, double amount){
 
 void closeAcc(int acc){
     if (acc>950||acc<901) { // check if acc in range of accounts numbers
-        printf("Out of account numbers range.\n");
+        printf("Invalid account number.\n");
         return;
     }
     if (Accs[1][acc-901]==0) printf("This account is already closed\n");
     else {
         Accs[1][acc-901] = 0;
+        printf("Closed account number %d\n", acc);
     }
 }
 
 void addInterest(double interest){
     if (interest<0) {
-        printf("invalid input.\n");
+        printf("Invalid interest rate\n");
         return;
     }
     for (int i = 0; i<50; i++) {

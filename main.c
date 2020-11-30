@@ -24,7 +24,8 @@ int main()
         if (option=='O'){ // openAcc
             printf("Please enter amount for deposit:\n");
             if (scanf(" %lf", &amount)==1) {
-                openAcc(amount);
+                if (amount>=0) openAcc(amount);
+                else printf("Invalid Amount\n");
             }
             else { // invalid input
                 printf("Failed to read the amount\n");
@@ -42,22 +43,30 @@ int main()
         } else if (option=='D') { // deposit
             printf("Please enter account number:\n");
             if (scanf(" %d", &accNum)==1) {
-                printf("Please enter the amount to deposit:\n");
-                if (scanf(" %lf", &amount)==1) {
-                    deposit(accNum, amount);
+                if (checkAcc(accNum)==1) {
+                    printf("Please enter the amount to deposit:\n");
+                    if (scanf(" %lf", &amount)==1) {
+                            deposit(accNum, amount);
+                    } else {
+                        printf("Failed to read the amount\n");
+                    }
                 }
-            } else { // invalid input
+            } else {
                 printf("Failed to read the account number\n");
             }
 
         } else if (option=='W') { // withdrawal
             printf("Please enter account number:\n");
             if (scanf(" %d", &accNum)==1) {
-                printf("Please enter the amount to withdraw:\n");
-                if (scanf(" %lf", &amount)==1) {
-                    withdrawal(accNum, amount);
+                if (checkAcc(accNum)==1) {
+                    printf("Please enter the amount to withdrawal:\n");
+                    if (scanf(" %lf", &amount)==1) {
+                            withdrawal(accNum, amount);
+                    } else {
+                        printf("Failed to read the amount\n");
+                    }
                 }
-            } else { // invalid input
+            } else {
                 printf("Failed to read the account number\n");
             }
 
