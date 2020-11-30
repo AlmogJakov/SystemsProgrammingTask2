@@ -5,7 +5,7 @@ int main()
 {
     char option; // temporary option input
     double amount; // temporary amount input
-    double interest; // temporary interest input
+    int interest; // temporary interest input
     int accNum; // temporary account input
     int bool = 1; // boolean to run the whole task until exit
 
@@ -81,7 +81,7 @@ int main()
 
         } else if (option=='I') { // addInterest
             printf("Please enter interest rate:\n");
-            if (scanf(" %lf", &interest)==1) {
+            if (scanf(" %d", &interest)==1) {
                 addInterest(interest);
             }
             else { // invalid input

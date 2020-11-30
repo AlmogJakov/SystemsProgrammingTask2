@@ -61,9 +61,6 @@ void withdrawal(int acc, double amount){
         printf("Out of account numbers range.\n");
         return;
     }
-    //if (amount<0) { // check if amount is positive
-    //    amount*=(-1);
-    //}
     if (Accs[1][acc-901]==0) printf("This account is closed\n");
     else {
         if (Accs[0][acc-901]-amount>=0){
@@ -87,7 +84,7 @@ void closeAcc(int acc){
     }
 }
 
-void addInterest(double interest){
+void addInterest(int interest){
     if (interest<0) {
         printf("Invalid interest rate\n");
         return;
@@ -95,7 +92,8 @@ void addInterest(double interest){
     for (int i = 0; i<50; i++) {
         if (Accs[1][i]==1) {
             // save the amount with 2 digits only after the dot
-            Accs[0][i] = ((int)((Accs[0][i]*(1+(interest/100)))*100))/100.0;
+            //Accs[0][i] = Accs[0][i]*(1+(interest/100.0));
+            Accs[0][i] = ((int)((Accs[0][i]*(1+(interest/100.0)))*100))/100.0;
         }
     }
 }
